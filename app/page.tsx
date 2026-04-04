@@ -1001,7 +1001,7 @@ export default function Home() {
               Ressom Properties
             </div>
             <div style={{ fontSize: 11, color: "#8A8078", marginTop: 2 }}>
-              © 2026 · Northern Virginia · adamressom.com
+              © 2026 · Northern Virginia · Washington, D.C
             </div>
           </div>
         </div>
