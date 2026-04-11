@@ -15,16 +15,17 @@ export default function PropertiesPage() {
       type: "Luxury",
     },
     {
-     id: 2,
-     image: "https://photos.zillowstatic.com/fp/acc0ffea568e2900436a63032105f099-uncropped_scaled_within_1536_1152.webp",
-     title: "Laurel Ridge Townhome",
-     location: "Lorton, VA",
-     price: "$4,080/mo",
-     beds: 3,
-     baths: 2,
-     sqft: "1,800",
-     type: "For Rent",
-},
+      id: 2,
+      image:
+        "https://photos.zillowstatic.com/fp/acc0ffea568e2900436a63032105f099-uncropped_scaled_within_1536_1152.webp",
+      title: "Laurel Ridge Townhome",
+      location: "Lorton, VA",
+      price: "$4,080/mo",
+      beds: 3,
+      baths: 2,
+      sqft: "1,800",
+      type: "For Rent",
+    },
     {
       id: 3,
       image:
@@ -323,51 +324,84 @@ export default function PropertiesPage() {
               </div>
 
               <div style={{ padding: 28 }}>
-                <h3
-                  style={{
-                    fontSize: 24,
-                    fontWeight: 600,
-                    color: "#3E2E26",
-                    marginBottom: 8,
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {property.title}
-                </h3>
-
                 <div
                   style={{
                     display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    color: "#8A8078",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: 16,
                     marginBottom: 18,
-                    fontSize: 14,
                   }}
                 >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#8A8078"
-                    strokeWidth="1.8"
-                  >
-                    <path d="M12 21s-6-5.33-6-11a6 6 0 1 1 12 0c0 5.67-6 11-6 11Z" />
-                    <circle cx="12" cy="10" r="2.2" />
-                  </svg>
-                  <span>{property.location}</span>
-                </div>
+                  <div style={{ flex: 1 }}>
+                    <h3
+                      style={{
+                        fontSize: 24,
+                        fontWeight: 600,
+                        color: "#3E2E26",
+                        marginBottom: 8,
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {property.title}
+                    </h3>
 
-                <div
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 700,
-                    color: "#8B5E34",
-                    marginBottom: 18,
-                  }}
-                >
-                  {property.price}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        color: "#8A8078",
+                        marginBottom: 18,
+                        fontSize: 14,
+                      }}
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#8A8078"
+                        strokeWidth="1.8"
+                      >
+                        <path d="M12 21s-6-5.33-6-11a6 6 0 1 1 12 0c0 5.67-6 11-6 11Z" />
+                        <circle cx="12" cy="10" r="2.2" />
+                      </svg>
+                      <span>{property.location}</span>
+                    </div>
+
+                    <div
+                      style={{
+                        fontSize: 22,
+                        fontWeight: 700,
+                        color: "#8B5E34",
+                      }}
+                    >
+                      {property.price}
+                    </div>
+                  </div>
+
+                  <Link
+                    href="/properties/laurel-ridge-townhome"
+                    style={{ textDecoration: "none", flexShrink: 0 }}
+                  >
+                    <div
+                      style={{
+                        background: "#8B5E34",
+                        color: "#F8F5F0",
+                        padding: "10px 18px",
+                        borderRadius: 999,
+                        fontSize: 12,
+                        fontWeight: 500,
+                        letterSpacing: "0.04em",
+                        whiteSpace: "nowrap",
+                        cursor: "pointer",
+                        marginTop: 2,
+                      }}
+                    >
+                      View
+                    </div>
+                  </Link>
                 </div>
 
                 <div
@@ -430,6 +464,12 @@ export default function PropertiesPage() {
               </div>
             </div>
           ))}
+          <div style={{ padding: 28 }}>
+  ...
+  <Link href="/properties/laurel-ridge-townhome">
+    <button>View</button>
+  </Link>
+</div>
         </div>
       </section>
     </main>
