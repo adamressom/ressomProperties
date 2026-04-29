@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NavAuth from "@/components/NavAuth";
 import { withAuth } from "@workos-inc/authkit-nextjs";
 
 export default async function ContactPage() {

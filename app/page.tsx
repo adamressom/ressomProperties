@@ -1,6 +1,7 @@
 import Link from "next/link";
+import NavAuth from "@/components/NavAuth";
 
-export default function Home() {
+export default async function Home() {
   const stats = [
     { n: "15+", l: "Years of development" },
     { n: "42", l: "Properties completed" },
@@ -185,27 +186,7 @@ export default function Home() {
       {l}
     </Link>
   ))}
-
-  <button style={{
-    fontSize:12,
-    fontWeight:500,
-    background:"#1A1A1A",
-    color:"#F8F5F0",
-    border:"none",
-    borderRadius:8,
-    padding:"10px 22px",
-    cursor:"pointer",
-    display:"flex",
-    alignItems:"center",
-    gap:7,
-    letterSpacing:"0.03em"
-  }}>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F8F5F0" strokeWidth="1.8">
-      <rect x="3" y="5" width="18" height="14" rx="2"/>
-      <path d="M3 7l9 6 9-6"/>
-    </svg>
-    Sign Up
-  </button>
+  <NavAuth />
 </div>
       </nav>
 

@@ -7,7 +7,7 @@ export default function TeamPage() {
       name: "Tom Ressom",
       role: "Founder & Principal",
       image:
-        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=900&q=80",
+        "https://media.licdn.com/dms/image/v2/D4E03AQHgA8uiI7FHiQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721162456516?e=1779321600&v=beta&t=OSkI3C1TmU8bPLXgm-uhKwXeYHp-oudUy0IaHoJMWgU",
       bio: "Guides the long-term family vision behind Ressom Properties, with a focus on trust, legacy, and high-standard development.",
       sales: "$50M+ in portfolio leadership",
       linkedin: "#",

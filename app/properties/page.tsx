@@ -4,8 +4,7 @@ export default function PropertiesPage() {
   const properties = [
     {
       id: 1,
-      image:
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
       title: "Ressom Estate at McLean",
       location: "McLean, VA",
       price: "$1,200,000",
@@ -13,11 +12,12 @@ export default function PropertiesPage() {
       baths: 4,
       sqft: "4,200",
       type: "Luxury",
+      status: "open",
+      href: "/properties/ressom-estate-mclean",
     },
     {
       id: 2,
-      image:
-        "https://photos.zillowstatic.com/fp/acc0ffea568e2900436a63032105f099-uncropped_scaled_within_1536_1152.webp",
+      image: "https://photos.zillowstatic.com/fp/acc0ffea568e2900436a63032105f099-uncropped_scaled_within_1536_1152.webp",
       title: "Laurel Ridge Townhome",
       location: "Lorton, VA",
       price: "$4,080/mo",
@@ -25,11 +25,12 @@ export default function PropertiesPage() {
       baths: 2,
       sqft: "1,800",
       type: "For Rent",
+      status: "open",
+      href: "/properties/laurel-ridge-townhome",
     },
     {
       id: 3,
-      image:
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
       title: "Waterfront Estate Concept",
       location: "Washington, D.C",
       price: "Coming Q2 2026",
@@ -37,11 +38,12 @@ export default function PropertiesPage() {
       baths: 3,
       sqft: "3,900",
       type: "Mixed-Use",
+      status: "closed",
+      href: "/properties/waterfront-estate",
     },
     {
       id: 4,
-      image:
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
       title: "Suburban Family Home",
       location: "Fairfax, VA",
       price: "$735,000",
@@ -49,11 +51,12 @@ export default function PropertiesPage() {
       baths: 3,
       sqft: "2,950",
       type: "Residential",
+      status: "open",
+      href: "/properties/suburban-family-home",
     },
     {
       id: 5,
-      image:
-        "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=1200&q=80",
       title: "Mountain View Retreat",
       location: "Reston, VA",
       price: "$1,450,000",
@@ -61,11 +64,12 @@ export default function PropertiesPage() {
       baths: 4,
       sqft: "4,850",
       type: "Luxury",
+      status: "open",
+      href: "/properties/mountain-view-retreat",
     },
     {
       id: 6,
-      image:
-        "https://images.unsplash.com/photo-1600563438938-a9a27216b4f5?w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1600563438938-a9a27216b4f5?w=1200&q=80",
       title: "Urban Loft Residence",
       location: "Tysons, VA",
       price: "$890,000",
@@ -73,6 +77,8 @@ export default function PropertiesPage() {
       baths: 2,
       sqft: "1,650",
       type: "Modern",
+      status: "closed",
+      href: "/properties/urban-loft-residence",
     },
   ];
 
@@ -87,43 +93,18 @@ export default function PropertiesPage() {
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap');
-
-        * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
-
-        .serif {
-          font-family: 'Cormorant Garamond', serif;
-        }
-
-        .nav-link {
-          transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-          color: #1A1A1A !important;
-        }
-
-        .property-card {
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .property-card:hover {
-          transform: translateY(-6px);
-          box-shadow: 0 22px 55px rgba(26, 26, 26, 0.10);
-        }
-
-        .property-image {
-          transition: transform 0.35s ease;
-        }
-
-        .property-card:hover .property-image {
-          transform: scale(1.04);
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        .serif { font-family: 'Cormorant Garamond', serif; }
+        .nav-link { transition: color 0.2s ease; }
+        .nav-link:hover { color: #1A1A1A !important; }
+        .property-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .property-card:hover { transform: translateY(-6px); box-shadow: 0 22px 55px rgba(26,26,26,0.10); }
+        .property-image { transition: transform 0.35s ease; }
+        .property-card:hover .property-image { transform: scale(1.04); }
+        .view-btn:hover { background: #6B4728 !important; }
       `}</style>
 
+      {/* NAV */}
       <nav
         style={{
           display: "flex",
@@ -164,14 +145,9 @@ export default function PropertiesPage() {
           >
             RP
           </div>
-
           <span
             className="serif"
-            style={{
-              fontSize: 18,
-              fontWeight: 500,
-              letterSpacing: "0.06em",
-            }}
+            style={{ fontSize: 18, fontWeight: 500, letterSpacing: "0.06em" }}
           >
             Ressom Properties
           </span>
@@ -194,30 +170,32 @@ export default function PropertiesPage() {
                 fontSize: 13,
                 color: l === "Properties" ? "#1A1A1A" : "#8A8078",
                 textDecoration: "none",
+                fontWeight: l === "Properties" ? 500 : 400,
               }}
             >
               {l}
             </Link>
           ))}
-
-          <button
+          <Link
+            href="/sign-up"
             style={{
               fontSize: 12,
               fontWeight: 500,
               background: "#1A1A1A",
               color: "#F8F5F0",
-              border: "none",
               borderRadius: 8,
               padding: "10px 22px",
-              cursor: "pointer",
               letterSpacing: "0.03em",
+              textDecoration: "none",
+              display: "inline-block",
             }}
           >
             Sign Up
-          </button>
+          </Link>
         </div>
       </nav>
 
+      {/* HEADER */}
       <section style={{ padding: "88px 44px 36px", textAlign: "center" }}>
         <div
           style={{
@@ -273,6 +251,7 @@ export default function PropertiesPage() {
         </p>
       </section>
 
+      {/* GRID */}
       <section style={{ padding: "24px 44px 80px" }}>
         <div
           style={{
@@ -293,6 +272,7 @@ export default function PropertiesPage() {
                 boxShadow: "0 10px 30px rgba(26,26,26,0.04)",
               }}
             >
+              {/* IMAGE */}
               <div style={{ position: "relative", overflow: "hidden" }}>
                 <img
                   src={property.image}
@@ -305,24 +285,59 @@ export default function PropertiesPage() {
                     display: "block",
                   }}
                 />
+
+                {/* Type badge — top left */}
                 <div
                   style={{
                     position: "absolute",
-                    top: 20,
-                    left: 20,
+                    top: 16,
+                    left: 16,
                     background: "#8B5E34",
                     color: "#F8F5F0",
-                    padding: "10px 18px",
+                    padding: "7px 14px",
                     borderRadius: 999,
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 500,
                     letterSpacing: "0.04em",
                   }}
                 >
                   {property.type}
                 </div>
+
+                {/* Status badge — top right */}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 16,
+                    right: 16,
+                    background: "rgba(30,30,30,0.72)",
+                    backdropFilter: "blur(10px)",
+                    color: "#F0ECE6",
+                    padding: "7px 13px",
+                    borderRadius: 999,
+                    fontSize: 11,
+                    fontWeight: 500,
+                    letterSpacing: "0.05em",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 7,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 7,
+                      height: 7,
+                      borderRadius: "50%",
+                      background: property.status === "open" ? "#22C55E" : "#EF4444",
+                      display: "inline-block",
+                      flexShrink: 0,
+                    }}
+                  />
+                  {property.status === "open" ? "Open" : "Closed"}
+                </div>
               </div>
 
+              {/* BODY */}
               <div style={{ padding: 28 }}>
                 <div
                   style={{
@@ -336,7 +351,7 @@ export default function PropertiesPage() {
                   <div style={{ flex: 1 }}>
                     <h3
                       style={{
-                        fontSize: 24,
+                        fontSize: 22,
                         fontWeight: 600,
                         color: "#3E2E26",
                         marginBottom: 8,
@@ -350,15 +365,15 @@ export default function PropertiesPage() {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: 8,
+                        gap: 6,
                         color: "#8A8078",
-                        marginBottom: 18,
-                        fontSize: 14,
+                        marginBottom: 14,
+                        fontSize: 13,
                       }}
                     >
                       <svg
-                        width="16"
-                        height="16"
+                        width="14"
+                        height="14"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="#8A8078"
@@ -372,7 +387,7 @@ export default function PropertiesPage() {
 
                     <div
                       style={{
-                        fontSize: 22,
+                        fontSize: 20,
                         fontWeight: 700,
                         color: "#8B5E34",
                       }}
@@ -381,15 +396,17 @@ export default function PropertiesPage() {
                     </div>
                   </div>
 
+                  {/* View button */}
                   <Link
-                    href="/properties/laurel-ridge-townhome"
+                    href={property.href}
                     style={{ textDecoration: "none", flexShrink: 0 }}
                   >
                     <div
+                      className="view-btn"
                       style={{
                         background: "#8B5E34",
                         color: "#F8F5F0",
-                        padding: "10px 18px",
+                        padding: "10px 20px",
                         borderRadius: 999,
                         fontSize: 12,
                         fontWeight: 500,
@@ -397,6 +414,7 @@ export default function PropertiesPage() {
                         whiteSpace: "nowrap",
                         cursor: "pointer",
                         marginTop: 2,
+                        transition: "background 0.2s",
                       }}
                     >
                       View
@@ -404,6 +422,7 @@ export default function PropertiesPage() {
                   </Link>
                 </div>
 
+                {/* SPECS */}
                 <div
                   style={{
                     borderTop: "1px solid #EAE4DC",
@@ -416,29 +435,14 @@ export default function PropertiesPage() {
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#7B6F66"
-                      strokeWidth="1.8"
-                    >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7B6F66" strokeWidth="1.8">
                       <path d="M3 7h18v10H3z" />
                       <path d="M7 17V7" />
                     </svg>
                     <span>{property.beds} Beds</span>
                   </div>
-
                   <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#7B6F66"
-                      strokeWidth="1.8"
-                    >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7B6F66" strokeWidth="1.8">
                       <path d="M4 12h16" />
                       <path d="M6 12V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3" />
                       <path d="M5 12v5" />
@@ -446,16 +450,8 @@ export default function PropertiesPage() {
                     </svg>
                     <span>{property.baths} Baths</span>
                   </div>
-
                   <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#7B6F66"
-                      strokeWidth="1.8"
-                    >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7B6F66" strokeWidth="1.8">
                       <rect x="4" y="4" width="16" height="16" />
                     </svg>
                     <span>{property.sqft} sqft</span>
@@ -464,12 +460,6 @@ export default function PropertiesPage() {
               </div>
             </div>
           ))}
-          <div style={{ padding: 28 }}>
-  ...
-  <Link href="/properties/laurel-ridge-townhome">
-    <button>View</button>
-  </Link>
-</div>
         </div>
       </section>
     </main>
