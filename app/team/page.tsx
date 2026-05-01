@@ -6,50 +6,18 @@ export default function TeamPage() {
   const [popup, setPopup] = useState(null);
 
   const team = [
-    {
-      id: 1,
-      name: "Mike Ressom",
-      role: "Property Owner · D.C. & Northern Virginia",
-      image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=900&q=80",
-      bio: "Leads development execution, construction oversight, and project planning across the family portfolio.",
-      phone: "+1 (202) 758-9876",
-      email: "mike@ressomproperties.com",
-      linkedin: null,
-      instagram: null,
-    },
-    {
-      id: 2,
-      name: "Moke Ressom",
-      role: "Property Owner · D.C.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=900&q=80",
-      bio: "Supports buyers, families, and partners with a direct, personal experience from first inquiry to final decision.",
-      phone: "+1 (703) 969-2792",
-      email: "moke@ressomproperties.com",
-      linkedin: null,
-      instagram: null,
-    },
-    {
-      id: 3,
-      name: "Tom Ressom",
-      role: "Property Owner · D.C. & Northern Virginia ",
-      image: "https://media.licdn.com/dms/image/v2/D4E03AQHgA8uiI7FHiQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721162456516?e=1779321600&v=beta&t=OSkI3C1TmU8bPLXgm-uhKwXeYHp-oudUy0IaHoJMWgU",
-      bio: "Guides the long-term family vision behind Ressom Properties, with a focus on trust, legacy, and high-standard development.",
-      phone: "+1 (703) 839-0823",
-      email: "hwressom@gmail.com",
-      linkedin: "https://www.linkedin.com/in/ressom/",
-      instagram: "https://www.instagram.com/tomressom/",
-    },
-    {
-      id: 4,
-      name: "Adam Ressom",
-      role: "Software Engineer",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80",
-      bio: "Built and maintains the Ressom Properties platform — designing the digital experience that connects families with their next home.",
-      phone: "+1 (202) 876-5788",
-      email: "adamressom@gmail.com",
-      linkedin: "https://www.linkedin.com/in/adam-ressom/",
-      instagram: "https://www.instagram.com/adamressom/",
-    },
+    { id: 1, name: "Mike Ressom", role: "Property Owner · D.C. & Northern Virginia", image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=900&q=80", bio: "Leads development execution, construction oversight, and project planning across the family portfolio.", phone: "+1 (202) 758-9876", email: "mike@ressomproperties.com", linkedin: null, instagram: null },
+    { id: 2, name: "Moke Ressom", role: "Property Owner · D.C.", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=900&q=80", bio: "Supports buyers, families, and partners with a direct, personal experience from first inquiry to final decision.", phone: "+1 (703) 969-2792", email: "moke@ressomproperties.com", linkedin: null, instagram: null },
+    { id: 3, name: "Tom Ressom", role: "Property Owner · D.C. & Northern Virginia", image: "https://media.licdn.com/dms/image/v2/D4E03AQHgA8uiI7FHiQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721162456516?e=1779321600&v=beta&t=OSkI3C1TmU8bPLXgm-uhKwXeYHp-oudUy0IaHoJMWgU", bio: "Guides the long-term family vision behind Ressom Properties, with a focus on trust, legacy, and high-standard development.", phone: "+1 (703) 839-0823", email: "hwressom@gmail.com", linkedin: "https://www.linkedin.com/in/ressom/", instagram: "https://www.instagram.com/tomressom/" },
+    { id: 4, name: "Adam Ressom", role: "Software Engineer", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80", bio: "Built and maintains the Ressom Properties platform — designing the digital experience that connects families with their next home.", phone: "+1 (202) 876-5788", email: "adamressom@gmail.com", linkedin: "https://www.linkedin.com/in/adam-ressom/", instagram: "https://www.instagram.com/adamressom/" },
+  ];
+
+  const navLinks = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Properties", href: "/properties" },
+    { label: "Team", href: "/team" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
@@ -64,12 +32,7 @@ export default function TeamPage() {
         .team-card:hover { transform: translateY(-6px); box-shadow: 0 22px 55px rgba(26,26,26,0.10); }
         .team-image { transition: transform 0.35s ease; }
         .team-card:hover .team-image { transform: scale(1.03); }
-        .icon-btn {
-          width: 40px; height: 40px; border-radius: 50%;
-          background: #F2EDE5; border: 1px solid #EAE4DC;
-          display: flex; align-items: center; justify-content: center;
-          cursor: pointer; transition: all 0.2s ease; text-decoration: none;
-        }
+        .icon-btn { width: 40px; height: 40px; border-radius: 50%; background: #F2EDE5; border: 1px solid #EAE4DC; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
         .icon-btn:hover { background: #1A1A1A; border-color: #1A1A1A; }
         .icon-btn:hover svg { stroke: #F8F5F0 !important; }
       `}</style>
@@ -77,11 +40,9 @@ export default function TeamPage() {
       {popup && (
         <div onClick={() => setPopup(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.45)", zIndex: 500, display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
           <div onClick={(e) => e.stopPropagation()} style={{ background: "#FFFFFF", borderRadius: 24, padding: "40px 44px", maxWidth: 380, width: "90%", textAlign: "center", position: "relative", border: "1px solid #EAE4DC", boxShadow: "0 32px 80px rgba(26,26,26,0.14)" }}>
-            <button onClick={() => setPopup(null)} style={{ position: "absolute", top: 16, right: 18, background: "none", border: "none", fontSize: 22, color: "#8A8078", cursor: "pointer", lineHeight: 1, fontFamily: "'Outfit', sans-serif" }}>x</button>
+            <button onClick={() => setPopup(null)} style={{ position: "absolute", top: 16, right: 18, background: "none", border: "none", fontSize: 22, color: "#8A8078", cursor: "pointer", lineHeight: 1, fontFamily: "'Outfit', sans-serif" }}>×</button>
             <div style={{ width: 56, height: 56, borderRadius: "50%", background: "#F2EDE5", border: "1px solid #EAE4DC", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 18px" }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.8-1.8a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.8-1.8a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
             </div>
             <p style={{ fontSize: 11, letterSpacing: "0.14em", color: "#B5A99A", textTransform: "uppercase", marginBottom: 8 }}>Contact directly</p>
             <h3 className="serif" style={{ fontSize: 22, fontWeight: 500, color: "#1A1A1A", marginBottom: 6 }}>{popup.name}</h3>
@@ -98,8 +59,8 @@ export default function TeamPage() {
           <span className="serif" style={{ fontSize: 18, fontWeight: 500, letterSpacing: "0.06em" }}>Ressom Properties</span>
         </Link>
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 30 }}>
-          {["Properties", "About", "Team", "Contact"].map((l) => (
-            <Link key={l} href={"/" + l.toLowerCase()} className="nav-link" style={{ fontSize: 13, color: l === "Team" ? "#1A1A1A" : "#8A8078", textDecoration: "none", fontWeight: l === "Team" ? 500 : 400 }}>{l}</Link>
+          {navLinks.map((l) => (
+            <Link key={l.label} href={l.href} className="nav-link" style={{ fontSize: 13, color: l.label === "Team" ? "#1A1A1A" : "#8A8078", textDecoration: "none", fontWeight: l.label === "Team" ? 500 : 400 }}>{l.label}</Link>
           ))}
           <Link href="/sign-up" style={{ fontSize: 12, fontWeight: 500, background: "#1A1A1A", color: "#F8F5F0", borderRadius: 8, padding: "10px 22px", letterSpacing: "0.03em", textDecoration: "none", display: "inline-block" }}>Sign Up</Link>
         </div>
@@ -132,32 +93,19 @@ export default function TeamPage() {
                 <p style={{ fontSize: 13, color: "#7D726A", lineHeight: 1.75, marginBottom: 18, fontWeight: 300 }}>{member.bio}</p>
                 <div style={{ borderTop: "1px solid #EAE4DC", paddingTop: 16, display: "flex", gap: 10 }}>
                   <button className="icon-btn" onClick={() => setPopup({ name: member.name, phone: member.phone })} title={"Call " + member.name}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.8-1.8a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.8-1.8a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
                   </button>
                   <a href={"mailto:" + member.email} className="icon-btn" title={"Email " + member.name}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8">
-                      <rect x="3" y="5" width="18" height="14" rx="2" />
-                      <path d="M3 7l9 6 9-6" />
-                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
                   </a>
                   {member.linkedin && (
                     <a href={member.linkedin} target="_blank" rel="noreferrer" className="icon-btn" title={member.name + " on LinkedIn"}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" />
-                        <rect x="2" y="9" width="4" height="12" />
-                        <circle cx="4" cy="4" r="2" />
-                      </svg>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
                     </a>
                   )}
                   {member.instagram && (
                     <a href={member.instagram} target="_blank" rel="noreferrer" className="icon-btn" title={member.name + " on Instagram"}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8">
-                        <rect x="3" y="3" width="18" height="18" rx="5" />
-                        <circle cx="12" cy="12" r="4" />
-                        <circle cx="17" cy="7" r="1.2" fill="#8B5E34" stroke="none" />
-                      </svg>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E34" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17" cy="7" r="1.2" fill="#8B5E34" stroke="none" /></svg>
                     </a>
                   )}
                 </div>
