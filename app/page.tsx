@@ -4,8 +4,8 @@ import NavAuth from "@/components/NavAuth";
 export default async function Home() {
   const stats = [
     { n: "15+", l: "Years of development" },
-    { n: "42", l: "Properties completed" },
-    { n: "$180M", l: "Portfolio value" },
+    { n: "13", l: "Properties completed" },
+    { n: "$8M", l: "Portfolio value" },
     { n: "100%", l: "Family owned & operated" },
   ];
 
@@ -67,14 +67,13 @@ export default async function Home() {
   ];
 
   const locations = [
-    "McLean",
     "Arlington",
     "Alexandria",
     "Fairfax",
-    "Tysons",
-    "Reston",
-    "Herndon",
-    "Vienna",
+    "Northeast DC",
+    "Lorton",
+    "Southeast DC",
+    "Northwest DC",
   ];
 
   return (
@@ -318,7 +317,7 @@ export default async function Home() {
               <strong style={{ color: "#1A1A1A", fontWeight: 500 }}>
                 The Ressom Family
               </strong>{" "}
-              · 3 principals, 1 vision
+              · 4 principals, 1 vision
             </span>
           </div>
         </div>
@@ -350,7 +349,7 @@ export default async function Home() {
               Portfolio Value
             </div>
             <div className="serif" style={{ fontSize: 22, fontWeight: 500 }}>
-              $180M+
+              $8M+
             </div>
             <div
               style={{
@@ -485,7 +484,7 @@ export default async function Home() {
               Properties Built
             </div>
             <div className="serif" style={{ fontSize: 22, fontWeight: 500 }}>
-              42
+              13
             </div>
             <div style={{ fontSize: 10, color: "#8A8078", marginTop: 2 }}>
               Across Northern Virginia
@@ -778,7 +777,7 @@ export default async function Home() {
               cursor: "pointer",
             }}
           >
-            Meet the Ressoms
+            Meet the Team
           </button>
         </div>
 
