@@ -64,8 +64,18 @@ const recentActivity = [
 export default function Home() {
   const [current, setCurrent] = useState(0);
 
-  const prev = () => setCurrent((c) => (c === 0 ? featuredProperties.length - 1 : c - 1));
-  const next = () => setCurrent((c) => (c === featuredProperties.length - 1 ? 0 : c + 1));
+  // Arrow bug fix — stop propagation so clicks don't bubble to the Link
+  function handlePrev(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrent((c) => (c === 0 ? featuredProperties.length - 1 : c - 1));
+  }
+
+  function handleNext(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrent((c) => (c === featuredProperties.length - 1 ? 0 : c + 1));
+  }
 
   const p = featuredProperties[current];
 
@@ -98,6 +108,7 @@ export default function Home() {
   ];
 
   const navLinks = [
+    { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Properties", href: "/properties" },
     { label: "Team", href: "/team" },
@@ -122,12 +133,11 @@ export default function Home() {
         .carousel-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.92); border: 1px solid #EAE4DC; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 16px rgba(26,26,26,0.10); }
         .carousel-btn:hover { background: #1A1A1A; }
         .carousel-btn:hover svg { stroke: #fff !important; }
-        .carousel-img { transition: opacity 0.35s ease; }
         @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .marquee-track { animation: marquee 22s linear infinite; }
       `}</style>
 
-      {/* NAV — no Home link since we're on home */}
+      {/* NAV */}
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 44px", background: "rgba(248,245,240,0.90)", backdropFilter: "blur(20px)", borderBottom: "1px solid #EAE4DC", position: "sticky", top: 0, zIndex: 100 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
           <div style={{ width: 36, height: 36, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", background: "#1A1A1A", color: "#F8F5F0", fontFamily: "'Cormorant Garamond', serif", fontSize: 16, fontWeight: 600 }}>RP</div>
@@ -135,9 +145,36 @@ export default function Home() {
         </div>
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 30 }}>
           {navLinks.map((l) => (
-            <Link key={l.label} href={l.href} className="nav-link" style={{ fontSize: 13, color: "#8A8078", textDecoration: "none" }}>{l.label}</Link>
+            <Link
+              key={l.label}
+              href={l.href}
+              className="nav-link"
+              style={{
+                fontSize: 13,
+                color: l.label === "Home" ? "#1A1A1A" : "#8A8078",
+                textDecoration: "none",
+                fontWeight: l.label === "Home" ? 600 : 400,
+              }}
+            >
+              {l.label}
+            </Link>
           ))}
-          {/* NavAuth removed since this is client component — add back if needed */}
+          <Link
+            href="/sign-up"
+            style={{
+              fontSize: 12,
+              fontWeight: 500,
+              background: "#1A1A1A",
+              color: "#F8F5F0",
+              borderRadius: 8,
+              padding: "10px 22px",
+              letterSpacing: "0.03em",
+              textDecoration: "none",
+              display: "inline-block",
+            }}
+          >
+            Sign Up
+          </Link>
         </div>
       </nav>
 
@@ -176,10 +213,9 @@ export default function Home() {
                 <div style={{ height: 220, position: "relative", overflow: "hidden" }}>
                   <img
                     key={current}
-                    className="carousel-img"
                     src={p.image}
                     alt={p.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "opacity 0.3s ease" }}
                   />
                   <span style={{ position: "absolute", bottom: 12, left: 12, background: "rgba(26,26,26,0.78)", backdropFilter: "blur(8px)", color: "#fff", fontSize: 10, fontWeight: 500, letterSpacing: "0.08em", padding: "5px 12px", borderRadius: 20 }}>{p.badge.toUpperCase()}</span>
                   <span style={{ position: "absolute", top: 12, right: 12, background: "rgba(30,30,30,0.72)", backdropFilter: "blur(10px)", color: "#F0ECE6", fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", padding: "7px 13px", borderRadius: 999, display: "flex", alignItems: "center", gap: 7 }}>
@@ -202,24 +238,20 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* Arrow buttons */}
+            {/* Arrow buttons — fixed with stopPropagation */}
             <button
-              onClick={prev}
+              onClick={handlePrev}
               className="carousel-btn"
-              style={{ position: "absolute", left: -18, top: "50%", transform: "translateY(-50%)", zIndex: 10, border: "none" }}
+              style={{ position: "absolute", left: -18, top: "50%", transform: "translateY(-50%)", zIndex: 10, border: "none", background: "rgba(255,255,255,0.92)" }}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
             </button>
             <button
-              onClick={next}
+              onClick={handleNext}
               className="carousel-btn"
-              style={{ position: "absolute", right: -18, top: "50%", transform: "translateY(-50%)", zIndex: 10, border: "none" }}
+              style={{ position: "absolute", right: -18, top: "50%", transform: "translateY(-50%)", zIndex: 10, border: "none", background: "rgba(255,255,255,0.92)" }}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
             </button>
           </div>
 
@@ -241,7 +273,7 @@ export default function Home() {
             <div style={{ flex: 1, height: 1, background: "#EAE4DC" }} />
           </div>
 
-          {/* Recent Activity — replaces portfolio stats */}
+          {/* Recent Activity */}
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {recentActivity.map((a) => (
               <div key={a.type} style={{ display: "flex", alignItems: "center", gap: 12, background: "#fff", border: "1px solid #EAE4DC", borderRadius: 12, padding: "12px 16px" }}>
@@ -359,32 +391,19 @@ export default function Home() {
               </div>
               <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                 <a href={"tel:" + t.phone.replace(/\D/g, "")} className="icon-btn" title="Call">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(248,245,240,0.6)" strokeWidth="1.8">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.8-1.8a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(248,245,240,0.6)" strokeWidth="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.8-1.8a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
                 </a>
                 <a href={"mailto:" + t.email} className="icon-btn" title="Email">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(248,245,240,0.6)" strokeWidth="1.8">
-                    <rect x="3" y="5" width="18" height="14" rx="2" />
-                    <path d="M3 7l9 6 9-6" />
-                  </svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(248,245,240,0.6)" strokeWidth="1.8"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
                 </a>
                 {t.linkedin && (
                   <a href={t.linkedin} target="_blank" rel="noreferrer" className="icon-btn" title="LinkedIn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(248,245,240,0.6)" strokeWidth="1.8">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" />
-                      <rect x="2" y="9" width="4" height="12" />
-                      <circle cx="4" cy="4" r="2" />
-                    </svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(248,245,240,0.6)" strokeWidth="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
                   </a>
                 )}
                 {t.instagram && (
                   <a href={t.instagram} target="_blank" rel="noreferrer" className="icon-btn" title="Instagram">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(248,245,240,0.6)" strokeWidth="1.8">
-                      <rect x="3" y="3" width="18" height="18" rx="5" />
-                      <circle cx="12" cy="12" r="4" />
-                      <circle cx="17" cy="7" r="1.2" fill="rgba(248,245,240,0.6)" stroke="none" />
-                    </svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(248,245,240,0.6)" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17" cy="7" r="1.2" fill="rgba(248,245,240,0.6)" stroke="none" /></svg>
                   </a>
                 )}
               </div>
@@ -425,12 +444,24 @@ export default function Home() {
         </div>
         <div style={{ display: "flex", gap: 22, alignItems: "center" }}>
           {[
-            { label: "Properties", href: "/properties" },
+            { label: "Home", href: "/" },
             { label: "About", href: "/about" },
+            { label: "Properties", href: "/properties" },
             { label: "Team", href: "/team" },
             { label: "Contact", href: "/contact" },
           ].map((item) => (
-            <Link key={item.label} href={item.href} style={{ fontSize: 12, color: "#8A8078", textDecoration: "none" }}>{item.label}</Link>
+            <Link
+              key={item.label}
+              href={item.href}
+              style={{
+                fontSize: 12,
+                color: item.label === "Home" ? "#1A1A1A" : "#8A8078",
+                textDecoration: "none",
+                fontWeight: item.label === "Home" ? 600 : 400,
+              }}
+            >
+              {item.label}
+            </Link>
           ))}
           <a href="https://www.instagram.com/adamressom/" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8078" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17" cy="7" r="1.2" fill="#8A8078" stroke="none" /></svg>
