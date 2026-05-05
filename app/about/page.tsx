@@ -25,11 +25,10 @@ const team = [
   { initials: "MK", name: "Moke Ressom", role: "Property Owner", bg: "#3A354A", color: "#A882C4", quote: "We treat every client like family. Because that's what we'd want for ourselves." },
 ];
 
-const stats = [
-  { n: "15+", l: "Years active" },
-  { n: "13", l: "Properties completed" },
-  { n: "$8M+", l: "Portfolio value" },
-  { n: "3", l: "Family principals" },
+const pillars = [
+  { label: "Luxury", count: "4+", sub: "Premium developments" },
+  { label: "Affordable", count: "6+", sub: "Accessible homes" },
+  { label: "Mixed-Use", count: "3+", sub: "Commercial & residential" },
 ];
 
 const navLinks = [
@@ -56,10 +55,13 @@ export default function AboutPage() {
         .value-card { transition: all 0.25s ease; cursor: default; }
         .team-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
         .team-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,26,26,0.10); }
+        .pillar-card { transition: all 0.3s ease; }
+        .pillar-card:hover { transform: translateY(-3px); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in { animation: fadeIn 0.35s ease forwards; }
-        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .marquee-track { animation: marquee 28s linear infinite; }
+        @keyframes countUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        .count-up { animation: countUp 0.6s ease forwards; }
+        @keyframes slideIn { from { opacity: 0; width: 0; } to { opacity: 1; width: 100%; } }
       `}</style>
 
       {/* NAV */}
@@ -83,58 +85,112 @@ export default function AboutPage() {
           <span style={{ fontSize: 11, fontWeight: 500, color: "#8A8078", letterSpacing: "0.16em", textTransform: "uppercase" }}>Est. 2009 · Fairfax, Virginia</span>
           <div style={{ width: 28, height: 1, background: "#C4A882" }} />
         </div>
-
         <h1 className="serif" style={{ fontSize: "clamp(52px, 7vw, 88px)", fontWeight: 400, lineHeight: 1.02, marginBottom: 28, letterSpacing: "-0.02em" }}>
           A family built on<br /><em style={{ color: "#C4A882" }}>property & purpose</em>
         </h1>
-
         <p style={{ fontSize: 17, color: "#8A8078", lineHeight: 1.85, maxWidth: 620, margin: "0 auto 48px", fontWeight: 300 }}>
           In 2009, three brothers from Northern Virginia decided to turn their shared properties into something bigger — a family business rooted in trust, quality, and community. Fifteen years later, Ressom Properties stands as one of NOVA&apos;s most reliable family-owned real estate groups.
         </p>
-
         <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
-          <Link href="/properties" style={{ fontSize: 13, fontWeight: 500, background: "#1A1A1A", color: "#F8F5F0", borderRadius: 10, padding: "14px 32px", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
-            View Properties
-          </Link>
-          <Link href="/contact" style={{ fontSize: 13, background: "transparent", color: "#1A1A1A", border: "1.5px solid #EAE4DC", borderRadius: 10, padding: "14px 32px", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
-            Get in Touch
-          </Link>
+          <Link href="/properties" style={{ fontSize: 13, fontWeight: 500, background: "#1A1A1A", color: "#F8F5F0", borderRadius: 10, padding: "14px 32px", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>View Properties</Link>
+          <Link href="/contact" style={{ fontSize: 13, background: "transparent", color: "#1A1A1A", border: "1.5px solid #EAE4DC", borderRadius: 10, padding: "14px 32px", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Get in Touch</Link>
         </div>
       </section>
 
-      {/* STATS ROW */}
-      <section style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", borderTop: "1px solid #EAE4DC", borderBottom: "1px solid #EAE4DC", background: "#fff" }}>
-        {stats.map((s, i) => (
-          <div key={s.l} style={{ padding: "32px 44px", borderRight: i < 3 ? "1px solid #EAE4DC" : "none", textAlign: "center" }}>
-            <div className="serif" style={{ fontSize: 44, fontWeight: 400, lineHeight: 1, color: "#1A1A1A", marginBottom: 6 }}>{s.n}</div>
-            <div style={{ fontSize: 12, color: "#8A8078", letterSpacing: "0.06em", textTransform: "uppercase" }}>{s.l}</div>
+      {/* IMPACT STRIP — replaces boring stats bar */}
+      <section style={{ padding: "0 44px 80px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 12 }}>
+
+          {/* Large feature card */}
+          <div style={{ gridColumn: "1 / 3", background: "#1A1A1A", borderRadius: 20, padding: "40px 44px", display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 200 }}>
+            <div style={{ fontSize: 11, letterSpacing: "0.14em", color: "rgba(196,168,130,0.7)", textTransform: "uppercase", marginBottom: 12 }}>Founded</div>
+            <div>
+              <div className="serif" style={{ fontSize: 72, fontWeight: 400, color: "#F8F5F0", lineHeight: 1 }}>2009</div>
+              <div style={{ fontSize: 13, color: "rgba(248,245,240,0.45)", marginTop: 8 }}>Fairfax, Virginia · Three brothers, one vision</div>
+            </div>
           </div>
-        ))}
+
+          {/* Properties card */}
+          <div style={{ background: "#fff", border: "1px solid #EAE4DC", borderRadius: 20, padding: "32px 28px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div style={{ fontSize: 11, letterSpacing: "0.12em", color: "#8A8078", textTransform: "uppercase", marginBottom: 12 }}>Properties Built</div>
+            <div>
+              <div className="serif" style={{ fontSize: 56, fontWeight: 400, color: "#1A1A1A", lineHeight: 1 }}>13</div>
+              <div style={{ fontSize: 12, color: "#8A8078", marginTop: 8 }}>Across NOVA & D.C.</div>
+            </div>
+          </div>
+
+          {/* Portfolio card */}
+          <div style={{ background: "#F2EDE5", border: "1px solid #EAE4DC", borderRadius: 20, padding: "32px 28px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div style={{ fontSize: 11, letterSpacing: "0.12em", color: "#8A8078", textTransform: "uppercase", marginBottom: 12 }}>Portfolio Value</div>
+            <div>
+              <div className="serif" style={{ fontSize: 48, fontWeight: 400, color: "#1A1A1A", lineHeight: 1 }}>$8M<span style={{ fontSize: 28, color: "#C4A882" }}>+</span></div>
+              <div style={{ fontSize: 12, color: "#8A8078", marginTop: 8, display: "flex", alignItems: "center", gap: 6 }}>
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4CAF50", display: "inline-block" }} />
+                Active & growing
+              </div>
+            </div>
+          </div>
+
+          {/* Property type pills */}
+          {pillars.map((p) => (
+            <div key={p.label} className="pillar-card" style={{ background: "#fff", border: "1px solid #EAE4DC", borderRadius: 20, padding: "28px 24px", display: "flex", flexDirection: "column", gap: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <div style={{ fontSize: 11, letterSpacing: "0.1em", color: "#8A8078", textTransform: "uppercase" }}>{p.label}</div>
+                <div style={{ background: "#F2EDE5", color: "#5C4A3A", fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 20 }}>{p.count}</div>
+              </div>
+              <div className="serif" style={{ fontSize: 22, fontWeight: 500, color: "#1A1A1A" }}>{p.sub}</div>
+              <div style={{ height: 3, background: "#EAE4DC", borderRadius: 2, marginTop: 4 }}>
+                <div style={{ height: "100%", borderRadius: 2, background: "#C4A882", width: p.label === "Luxury" ? "60%" : p.label === "Affordable" ? "85%" : "45%", transition: "width 0.6s ease" }} />
+              </div>
+            </div>
+          ))}
+
+          {/* Years active — wide card */}
+          <div style={{ gridColumn: "4 / 5", gridRow: "2 / 3", background: "#C4A882", borderRadius: 20, padding: "32px 28px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div style={{ fontSize: 11, letterSpacing: "0.12em", color: "rgba(26,26,26,0.6)", textTransform: "uppercase", marginBottom: 12 }}>Years Active</div>
+            <div>
+              <div className="serif" style={{ fontSize: 56, fontWeight: 400, color: "#1A1A1A", lineHeight: 1 }}>15<span style={{ fontSize: 28 }}>+</span></div>
+              <div style={{ fontSize: 12, color: "rgba(26,26,26,0.6)", marginTop: 8 }}>Family owned & operated</div>
+            </div>
+          </div>
+
+        </div>
       </section>
 
-      {/* MARQUEE — words */}
-      <div style={{ overflow: "hidden", borderBottom: "1px solid #EAE4DC", padding: "12px 0", background: "#F2EDE5" }}>
-        <div className="marquee-track" style={{ display: "flex", gap: 48, whiteSpace: "nowrap", width: "max-content" }}>
-          {["Reliable", "Family-Owned", "Northern Virginia", "Transparent", "Trusted", "15+ Years", "Fairfax", "McLean", "Arlington", "D.C.", "Reliable", "Family-Owned", "Northern Virginia", "Transparent", "Trusted", "15+ Years", "Fairfax", "McLean", "Arlington", "D.C."].map((w, i) => (
-            <span key={i} style={{ fontSize: 12, color: "#8A8078", letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: 12 }}>
-              <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#C4A882", display: "inline-block" }} />
-              {w}
-            </span>
-          ))}
+      {/* TRUST RIBBON — replaces marquee */}
+      <section style={{ padding: "0 44px 80px" }}>
+        <div style={{ border: "1px solid #EAE4DC", borderRadius: 20, overflow: "hidden" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)" }}>
+            {[
+              { icon: "🏅", label: "Family Owned", sub: "Since 2009" },
+              { icon: "📍", label: "Fairfax Rooted", sub: "Northern Virginia" },
+              { icon: "🤝", label: "Direct Access", sub: "No middlemen" },
+              { icon: "🏗️", label: "13 Properties", sub: "Built & delivered" },
+              { icon: "⭐", label: "Trusted Brand", sub: "Client first always" },
+            ].map((item, i) => (
+              <div key={item.label} style={{ padding: "28px 20px", textAlign: "center", borderRight: i < 4 ? "1px solid #EAE4DC" : "none", background: "#fff" }}>
+                <div style={{ fontSize: 24, marginBottom: 10 }}>{item.icon}</div>
+                <div style={{ fontSize: 13, fontWeight: 500, color: "#1A1A1A", marginBottom: 4 }}>{item.label}</div>
+                <div style={{ fontSize: 11, color: "#8A8078", letterSpacing: "0.04em" }}>{item.sub}</div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* TOM QUOTE */}
-      <section style={{ padding: "80px 44px", maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
-        <div style={{ fontSize: 48, color: "#C4A882", lineHeight: 1, marginBottom: 24, fontFamily: "'Cormorant Garamond', serif" }}>"</div>
-        <p className="serif" style={{ fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 400, lineHeight: 1.45, color: "#1A1A1A", marginBottom: 28, fontStyle: "italic" }}>
-          We didn&apos;t start this to build a business. We started it to build something our family could be proud of — and our clients could trust.
-        </p>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
-          <div style={{ width: 42, height: 42, borderRadius: "50%", background: "#4A3F35", color: "#C4A882", display: "grid", placeItems: "center", fontFamily: "'Cormorant Garamond', serif", fontSize: 16, fontWeight: 500 }}>TR</div>
-          <div style={{ textAlign: "left" }}>
-            <div style={{ fontSize: 14, fontWeight: 500, color: "#1A1A1A" }}>Tom Ressom</div>
-            <div style={{ fontSize: 12, color: "#8A8078" }}>Founder, Ressom Properties</div>
+      <section style={{ padding: "0 44px 80px", maxWidth: 800, margin: "0 auto" }}>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontSize: 48, color: "#C4A882", lineHeight: 1, marginBottom: 24, fontFamily: "'Cormorant Garamond', serif" }}>"</div>
+          <p className="serif" style={{ fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 400, lineHeight: 1.45, color: "#1A1A1A", marginBottom: 28, fontStyle: "italic" }}>
+            We didn&apos;t start this to build a business. We started it to build something our family could be proud of — and our clients could trust.
+          </p>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
+            <div style={{ width: 42, height: 42, borderRadius: "50%", background: "#4A3F35", color: "#C4A882", display: "grid", placeItems: "center", fontFamily: "'Cormorant Garamond', serif", fontSize: 16, fontWeight: 500 }}>TR</div>
+            <div style={{ textAlign: "left" }}>
+              <div style={{ fontSize: 14, fontWeight: 500, color: "#1A1A1A" }}>Tom Ressom</div>
+              <div style={{ fontSize: 12, color: "#8A8078" }}>Founder, Ressom Properties</div>
+            </div>
           </div>
         </div>
       </section>
@@ -153,12 +209,7 @@ export default function AboutPage() {
               className="value-card"
               onMouseEnter={() => setHoveredValue(i)}
               onMouseLeave={() => setHoveredValue(null)}
-              style={{
-                background: hoveredValue === i ? "#1A1A1A" : "#fff",
-                border: "1px solid #EAE4DC",
-                borderRadius: 20,
-                padding: "32px 24px",
-              }}
+              style={{ background: hoveredValue === i ? "#1A1A1A" : "#fff", border: "1px solid #EAE4DC", borderRadius: 20, padding: "32px 24px" }}
             >
               <div style={{ fontSize: 32, marginBottom: 16 }}>{v.icon}</div>
               <div style={{ fontSize: 16, fontWeight: 500, marginBottom: 10, color: hoveredValue === i ? "#F8F5F0" : "#1A1A1A", transition: "color 0.25s" }}>{v.title}</div>
@@ -176,29 +227,19 @@ export default function AboutPage() {
         </div>
         <h2 className="serif" style={{ fontSize: 38, fontWeight: 400, marginBottom: 48 }}>15 years in the making</h2>
 
-        {/* Year selector */}
         <div style={{ display: "flex", gap: 0, marginBottom: 48, borderRadius: 14, overflow: "hidden", border: "1px solid #EAE4DC", width: "fit-content" }}>
           {timeline.map((t, i) => (
             <button
               key={t.year}
               className="timeline-btn"
               onClick={() => setActiveYear(i)}
-              style={{
-                padding: "12px 20px",
-                fontSize: 13,
-                fontWeight: activeYear === i ? 600 : 400,
-                color: activeYear === i ? "#F8F5F0" : "#8A8078",
-                background: activeYear === i ? "#1A1A1A" : "transparent",
-                borderRight: i < timeline.length - 1 ? "1px solid #EAE4DC" : "none",
-                transition: "all 0.25s ease",
-              }}
+              style={{ padding: "12px 20px", fontSize: 13, fontWeight: activeYear === i ? 600 : 400, color: activeYear === i ? "#F8F5F0" : "#8A8078", background: activeYear === i ? "#1A1A1A" : "transparent", borderRight: i < timeline.length - 1 ? "1px solid #EAE4DC" : "none", transition: "all 0.25s ease" }}
             >
               {t.year}
             </button>
           ))}
         </div>
 
-        {/* Timeline content */}
         <div key={activeYear} className="fade-in" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
           <div>
             <div style={{ fontSize: 11, letterSpacing: "0.14em", color: "#C4A882", textTransform: "uppercase", marginBottom: 12 }}>{timeline[activeYear].year}</div>
@@ -206,7 +247,6 @@ export default function AboutPage() {
             <p style={{ fontSize: 15, color: "#8A8078", lineHeight: 1.85, fontWeight: 300 }}>{timeline[activeYear].desc}</p>
           </div>
           <div>
-            {/* Visual block for each year */}
             <div style={{ background: "linear-gradient(135deg, #EDE8E0, #D8D0C4)", borderRadius: 20, height: 280, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
               <div style={{ position: "absolute", top: -30, right: -30, width: 180, height: 180, borderRadius: "50%", background: "rgba(196,168,130,0.15)" }} />
               <div style={{ position: "absolute", bottom: -40, left: -20, width: 140, height: 140, borderRadius: "50%", background: "rgba(196,168,130,0.10)" }} />
@@ -215,21 +255,16 @@ export default function AboutPage() {
                 <div style={{ fontSize: 13, color: "#8A8078", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 8 }}>{timeline[activeYear].title}</div>
               </div>
             </div>
-            {/* Progress dots */}
             <div style={{ display: "flex", gap: 8, justifyContent: "center", marginTop: 20 }}>
               {timeline.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveYear(i)}
-                  style={{ width: i === activeYear ? 24 : 8, height: 8, borderRadius: 999, background: i === activeYear ? "#1A1A1A" : "#C4A882", border: "none", cursor: "pointer", transition: "all 0.3s ease", padding: 0 }}
-                />
+                <button key={i} onClick={() => setActiveYear(i)} style={{ width: i === activeYear ? 24 : 8, height: 8, borderRadius: 999, background: i === activeYear ? "#1A1A1A" : "#C4A882", border: "none", cursor: "pointer", transition: "all 0.3s ease", padding: 0 }} />
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* MILESTONE HIGHLIGHT — Bravo Bar */}
+      {/* MILESTONE — Bravo Bar */}
       <section style={{ padding: "80px 44px" }}>
         <div style={{ background: "linear-gradient(135deg, #F2EDE5, #EDE8E0)", borderRadius: 28, padding: "64px 72px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center", border: "1px solid #EAE4DC" }}>
           <div>
@@ -281,7 +316,6 @@ export default function AboutPage() {
           </div>
           <Link href="/team" style={{ fontSize: 12, color: "#8A8078", borderBottom: "1px solid #EAE4DC", paddingBottom: 2, textDecoration: "none" }}>Full team page →</Link>
         </div>
-
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
           {team.map((t) => (
             <div key={t.name} className="team-card" style={{ background: "#fff", border: "1px solid #EAE4DC", borderRadius: 20, padding: 28 }}>
@@ -311,12 +345,8 @@ export default function AboutPage() {
             Whether you&apos;re looking to rent, buy, or invest — we handle every conversation personally. No middlemen. Just family.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
-            <Link href="/properties" style={{ fontSize: 13, fontWeight: 500, background: "#1A1A1A", color: "#F8F5F0", borderRadius: 10, padding: "14px 32px", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
-              Browse Properties
-            </Link>
-            <Link href="/contact" style={{ fontSize: 13, background: "transparent", color: "#1A1A1A", border: "1.5px solid #EAE4DC", borderRadius: 10, padding: "14px 32px", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
-              Contact the Team
-            </Link>
+            <Link href="/properties" style={{ fontSize: 13, fontWeight: 500, background: "#1A1A1A", color: "#F8F5F0", borderRadius: 10, padding: "14px 32px", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Browse Properties</Link>
+            <Link href="/contact" style={{ fontSize: 13, background: "transparent", color: "#1A1A1A", border: "1.5px solid #EAE4DC", borderRadius: 10, padding: "14px 32px", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Contact the Team</Link>
           </div>
         </div>
       </section>
@@ -347,4 +377,4 @@ export default function AboutPage() {
       </footer>
     </main>
   );
-}   
+}
